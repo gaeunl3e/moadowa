@@ -46,7 +46,7 @@ app.innerHTML=warning()+`<article class="workbook" data-animal="${current.id}"><
 app.querySelector('.back-link').onclick=e=>{e.preventDefault();location.hash='home';};app.querySelectorAll('[data-action="practice"]').forEach(b=>b.onclick=()=>showPractice());loadPractice(current.id);app.querySelector('[data-action="goal"]').onclick=()=>showGoal();app.querySelector('[data-action="save"]').onclick=()=>showSave();app.querySelector('.coin').onclick=()=>playCoin();app.querySelector('[data-action="donate"]').onclick=()=>{const d=document.getElementById('donate');d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'});};
 app.querySelector('.hero-animal,.composite-art').onclick=e=>{cancelAnimalTouchHint();e.currentTarget.classList.add('wiggle');setTimeout(()=>document.querySelector('.wiggle')?.classList.remove('wiggle'),800);toast('오늘도 만나서 반가워요. 작은 마음을 함께 모아요!');};
 
-if(enteredRoute){photoInviteTimer=setTimeout(showPhotoInvite,1800);showAnimalTouchHint(current.id);}
+if(enteredRoute){photoInviteTimer=setTimeout(showPhotoInvite,1300);showAnimalTouchHint(current.id);}
 }
 let animalTouchHintCleanup=null;
 const animalTouchHintSeen=new Set();
@@ -60,12 +60,12 @@ function showAnimalTouchHint(id){
  const sparkles=document.createElement('span');sparkles.className='coin-touch-sparkles';sparkles.setAttribute('aria-hidden','true');sparkles.innerHTML='<i></i><i></i>';
  coin.append(sparkles);hero.classList.add('touch-discovery');
  const cleanup=()=>{clearTimeout(timer);hero.classList.remove('touch-discovery');sparkles.remove();};
- const timer=setTimeout(()=>{cleanup();if(animalTouchHintCleanup===cleanup)animalTouchHintCleanup=null;},6600);
+ const timer=setTimeout(()=>{cleanup();if(animalTouchHintCleanup===cleanup)animalTouchHintCleanup=null;},6350);
  animalTouchHintCleanup=cleanup;
 }
 function showPhotoInvite(){
  const invite=document.createElement('aside');invite.className='photo-invite';invite.setAttribute('role','status');invite.setAttribute('aria-live','polite');invite.innerHTML=`<button class="photo-invite-action" type="button"><strong>바로 사진으로 기록하기</strong><span>오늘 실천한 순간 기록</span></button><button class="photo-invite-close" type="button" aria-label="사진 기록 안내 닫기">${cameraIcon('close')}</button>`;document.body.append(invite);
- const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,entryDuration=reduced?150:350;
+ const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches,entryDuration=reduced?150:600;
  invite.animate([{opacity:0,transform:`translateX(-50%) translateY(${reduced?0:-7}px)`},{opacity:1,transform:'translateX(-50%) translateY(0)'}],{duration:entryDuration,easing:'cubic-bezier(.2,.7,.3,1)'});
  const dismiss=()=>{clearTimeout(photoInviteTimer);invite.remove();};invite.querySelector('.photo-invite-action').onclick=()=>{dismiss();showPractice();};invite.querySelector('.photo-invite-close').onclick=dismiss;photoInviteTimer=setTimeout(()=>{invite.inert=true;invite.animate([{opacity:1},{opacity:0}],{duration:matchMedia('(prefers-reduced-motion: reduce)').matches?150:450,easing:'ease-out',fill:'forwards'}).finished.then(()=>invite.remove()).catch(()=>invite.remove());},entryDuration+1800);
 }

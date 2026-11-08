@@ -130,7 +130,7 @@ dialog.camera-mode{height:var(--camera-height,100dvh);max-height:var(--camera-he
 .workbook[data-animal="1"] .composite-art{top:51.675%;left:5.3%;width:89.4%;height:35.65%}
 
 /* A one-time, quiet invitation: coin first, animal second, after the photo toast. */
-.coin-touch-sparkles{position:absolute;inset:0;pointer-events:none}.coin-touch-sparkles i{position:absolute;background:#fffaf1;width:10px;height:10px;mask:url('assets/snow-plus.svg') center/contain no-repeat;-webkit-mask:url('assets/snow-plus.svg') center/contain no-repeat;animation:touch-sparkle .75s ease-in-out 4.5s 2 both}.coin-touch-sparkles i:first-child{left:-17px;top:0}.coin-touch-sparkles i:last-child{right:-10px;top:-12px;width:7px;height:7px;animation-delay:4.7s}.touch-discovery .coin>img{animation:coin-discovery .75s ease-in-out 4.5s 2}
+.coin-touch-sparkles{position:absolute;inset:0;pointer-events:none}.coin-touch-sparkles i{position:absolute;background:#fffaf1;width:10px;height:10px;mask:url('assets/snow-plus.svg') center/contain no-repeat;-webkit-mask:url('assets/snow-plus.svg') center/contain no-repeat;animation:touch-sparkle .75s ease-in-out 4.25s 2 both}.coin-touch-sparkles i:first-child{left:-17px;top:0}.coin-touch-sparkles i:last-child{right:-10px;top:-12px;width:7px;height:7px;animation-delay:4.45s}.touch-discovery .coin>img{animation:coin-discovery .75s ease-in-out 4.25s 2}
 @keyframes coin-discovery{0%,100%{transform:translateY(0)}50%{transform:translateY(5px)}}
 
 @keyframes touch-sparkle{0%,100%{opacity:0;transform:scale(.6)}45%{opacity:.9;transform:scale(1)}}
