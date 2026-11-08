@@ -46,7 +46,7 @@ app.innerHTML=warning()+`<article class="workbook" data-animal="${current.id}"><
 app.querySelector('.back-link').onclick=e=>{e.preventDefault();location.hash='home';};app.querySelectorAll('[data-action="practice"]').forEach(b=>b.onclick=()=>showPractice());loadPractice(current.id);app.querySelector('[data-action="goal"]').onclick=()=>showGoal();app.querySelector('[data-action="save"]').onclick=()=>showSave();app.querySelector('.coin').onclick=()=>playCoin();app.querySelector('[data-action="donate"]').onclick=()=>{const d=document.getElementById('donate');d.open=true;d.scrollIntoView({behavior:'smooth',block:'start'});};
 app.querySelector('.hero-animal,.composite-art').onclick=e=>{cancelAnimalTouchHint();e.currentTarget.classList.add('wiggle');setTimeout(()=>document.querySelector('.wiggle')?.classList.remove('wiggle'),800);toast('오늘도 만나서 반가워요. 작은 마음을 함께 모아요!');};
 
-if(enteredRoute){showPhotoInvite();showAnimalTouchHint(current.id);}
+if(enteredRoute){photoInviteTimer=setTimeout(showPhotoInvite,1000);showAnimalTouchHint(current.id);}
 }
 let animalTouchHintCleanup=null;
 const animalTouchHintSeen=new Set();
@@ -60,7 +60,7 @@ function showAnimalTouchHint(id){
  const sparkles=document.createElement('span');sparkles.className='coin-touch-sparkles';sparkles.setAttribute('aria-hidden','true');sparkles.innerHTML='<i></i><i></i>';
  coin.append(sparkles);hero.classList.add('touch-discovery');
  const cleanup=()=>{clearTimeout(timer);hero.classList.remove('touch-discovery');sparkles.remove();};
- const timer=setTimeout(()=>{cleanup();if(animalTouchHintCleanup===cleanup)animalTouchHintCleanup=null;},4500);
+ const timer=setTimeout(()=>{cleanup();if(animalTouchHintCleanup===cleanup)animalTouchHintCleanup=null;},5500);
  animalTouchHintCleanup=cleanup;
 }
 function showPhotoInvite(){
