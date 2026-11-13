@@ -149,3 +149,7 @@ dialog.camera-mode{height:var(--camera-height,100dvh);max-height:var(--camera-he
 }
 @media(min-width:1200px){.catalog-card h2{font-size:21px}.catalog-card{padding:24px}.catalog-grid{gap:22px}}
 @media(prefers-reduced-motion:reduce){.catalog-card{transition:none}.catalog-card:hover{transform:none}}
+
+.nfc-reminder{display:none}
+@media(min-width:900px){.nfc-reminder{position:fixed;left:50%;bottom:32px;z-index:110;display:flex;align-items:center;gap:18px;width:max-content;max-width:calc(100vw - 64px);padding:22px 30px;border:1px solid #b0825533;border-radius:24px;background:#fffaf1f5;color:#845423;box-shadow:0 8px 36px #53300d24;opacity:0;transform:translate(-50%,12px);visibility:hidden;pointer-events:none;transition:opacity .5s ease,transform .5s ease,visibility .5s}.nfc-reminder.visible{opacity:1;transform:translate(-50%,0);visibility:visible}.nfc-reminder svg{width:32px;height:40px;flex:none}.nfc-reminder strong{display:block;font-size:19px;line-height:1.6;font-weight:800;word-break:keep-all}.nfc-reminder span{display:block;font-size:16px;line-height:1.6;margin-top:3px}}
+@media(prefers-reduced-motion:reduce){.nfc-reminder{transition:none}}
