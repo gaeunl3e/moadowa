@@ -213,3 +213,5 @@ dialog.exhibition-video{position:fixed;inset:0;width:min(88vw,1200px);max-width:
 @media(max-width:600px){dialog.exhibition-video{width:calc(100vw - 24px);max-width:none;border-radius:14px}.exhibition-video video{min-height:300px}.film-question{padding:26px 14px 18px}.film-question p{font-size:19px}.film-choices button{font-size:16px;min-height:44px}.exhibition-video .film-close{top:10px;right:10px}}
 
 .home-camera-hint,.catalog-cover .home-camera-hint{padding:0;background:none;border-radius:0;gap:0}.home-camera-hint>.home-camera-hint-art{display:block;width:250px;height:auto;max-width:100%;flex:none}.catalog-cover .home-camera-hint>.home-camera-hint-art{width:300px}@media(max-width:359px){.home-camera-hint>.home-camera-hint-art{width:225px}}
+
+@media(min-width:900px){.snow-camera-mode .camera-live{--camera-frame:clamp(20px,1.5vw,36px);background:#b08255}.snow-camera-mode .camera-live .camera-view{inset:var(--camera-frame);width:calc(100% - var(--camera-frame)*2);height:calc(100% - var(--camera-frame)*2);overflow:hidden}.snow-camera-mode .camera-live::after{inset:var(--camera-frame)}.snow-camera-mode .camera-live .camera-canvas{background:#b08255}}

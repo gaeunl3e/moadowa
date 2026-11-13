@@ -56,7 +56,7 @@ function showPracticeCamera(mode='animal'){
  const cameraHint=snowMode?'동물 눈이 내리는 순간을 사진으로 담아보세요.':'동물을 끌어 옮기고, 두 손가락으로 크기와 각도를 바꿔보세요.';
  const pose={x:.5,y:.5,width:.44,rotation:0,flip:false};
  const wideSnow=()=>snowMode&&matchMedia('(min-width:900px)').matches;
- const desktopCameraSize=()=>({width:1280,height:Math.round(1280*Math.min(innerHeight,window.visualViewport?.height||innerHeight)/innerWidth)});
+ const desktopCameraSize=()=>{const border=Math.min(36,Math.max(20,innerWidth*.015))*2;return {width:1280,height:Math.round(1280*(Math.min(innerHeight,window.visualViewport?.height||innerHeight)-border)/(innerWidth-border))};};
  const photoCanvas=source=>{const canvas=practiceSourceCanvas(source,1600);if(wideSnow()){const size=desktopCameraSize();canvas.width=1600;canvas.height=Math.round(1600*size.height/size.width);}return canvas;};
  openSheet('');sheet.classList.add('camera-mode');sheet.classList.toggle('snow-camera-mode',snowMode);const closeButton=sheet.querySelector('.close'),previousCloseHTML=closeButton.innerHTML;closeButton.innerHTML=cameraIcon('close');
  const stopStream=()=>{cancelAnimationFrame(frame);frame=0;if(stream){stream.getTracks().forEach(t=>t.stop());stream=null;}const video=content.querySelector('video');if(video)video.srcObject=null;};
