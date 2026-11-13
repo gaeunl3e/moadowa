@@ -212,7 +212,7 @@ const nfcReminder=document.createElement('aside');
 nfcReminder.className='nfc-reminder';
 nfcReminder.setAttribute('role','status');
 nfcReminder.setAttribute('aria-live','polite');
-nfcReminder.innerHTML='<svg viewBox="0 0 32 40" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="7" y="8" width="18" height="29" rx="4"/><path d="M13 32h6M11 4a10 10 0 0 1 10 0M14 1a5 5 0 0 1 4 0" stroke-linecap="round"/></svg><div><strong>동물에 휴대폰 상단을 가져다 대보세요.</strong><span>사이트로 연결됩니다.</span></div>';
+nfcReminder.innerHTML='<svg viewBox="0 0 32 40" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="7" y="8" width="18" height="29" rx="4"/><path d="M13 32h6M11 4a10 10 0 0 1 10 0M14 1a5 5 0 0 1 4 0" stroke-linecap="round"/></svg><div><strong>동물 저금통에 휴대폰 상단을 가져다 대보세요.</strong><span>사이트로 연결됩니다.</span></div>';
 document.body.append(nfcReminder);
 let nfcReminderHide;
 function hideNfcReminder(){clearTimeout(nfcReminderHide);nfcReminder.classList.remove('visible');}
