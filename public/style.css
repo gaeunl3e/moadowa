@@ -163,3 +163,17 @@ dialog.camera-mode{height:var(--camera-height,100dvh);max-height:var(--camera-he
  .photo-invite{left:50%;top:90px;width:420px}.workbook .back-link,.workbook .hero-photo{width:56px;height:56px;top:38px}.workbook .back-link{left:22px}.workbook .hero-photo{right:22px}.workbook .hero-photo svg{width:28px;height:28px}.workbook .back-link img{width:13px}
 }
 .home-camera{display:flex;align-items:center;justify-content:center;gap:9px;border:1px solid #fffaf170;border-radius:30px;background:transparent;color:var(--paper);min-width:44px;min-height:44px;padding:10px;cursor:pointer}.home-camera svg{width:24px;height:24px;flex:none}.home-workbook>.home-camera{position:absolute;right:6%;top:18px;z-index:5}.catalog-cover-actions{display:flex;align-items:flex-end;flex-direction:column;gap:16px}.catalog-cover .home-camera{font-size:15px;padding:10px 18px}.home-camera:hover{background:#fffaf11a}.camera-mode [hidden]{display:none!important}.camera-result-actions:has(.camera-record[hidden]){grid-template-columns:1fr}
+
+/* Fit the animal cover and savings panel into the first desktop view. */
+@media(min-width:900px){
+ .workbook{margin-top:20px}
+ .workbook-hero{height:58svh;min-height:330px;max-height:680px;aspect-ratio:auto}
+ .workbook .composite-heading{left:15%;width:70%;top:6%;height:26%}.workbook .composite-heading img{object-fit:contain}
+ .workbook .coin,.workbook[data-animal="8"] .coin{top:35%;left:45%;width:10%;height:11%}.workbook .coin>img{width:100%;height:100%;object-fit:contain}
+ .workbook .composite-art,.workbook:is([data-animal]) .composite-art{left:12%;width:76%;top:50%;height:37%}
+ .workbook:is([data-animal="3"],[data-animal="8"],[data-animal="14"]) .composite-art{top:47%;height:41%}
+ .workbook .hero-number{top:6%;left:46%;width:8%;height:9%}.workbook .hero-title{top:19%;left:37%;width:26%;height:11%}.workbook .hero-badges{top:19%;left:16%;width:68%;height:11%}.workbook .hero-number img,.workbook .hero-title img,.workbook .hero-badges img{width:100%;height:100%;object-fit:contain}
+ .workbook .hero-animal{top:51%;left:12%;width:76%;height:36%}.workbook .hero-animal img{width:100%;height:100%;object-fit:contain}
+ .workbook-savings{padding:24px 52px 0}.workbook-savings .balance-label{font-size:18px;line-height:26px;margin-bottom:14px}.workbook-savings .balance,.workbook-savings .balance small{font-size:48px}.workbook-savings .goal-row{margin-top:16px}.workbook-savings .goal-row,.workbook-savings .goal-row .text-btn,.workbook-savings .goal-help{font-size:16px;line-height:24px}.workbook-savings .progress{margin:8px 0 10px}.workbook-savings .actions{padding-top:16px}.workbook-savings .actions button{min-height:56px;font-size:20px}.workbook-savings .demo-note{font-size:12px;margin-top:8px}.workbook .back-link,.workbook .hero-photo{top:20px;width:48px;height:48px}
+}
+@media(min-width:900px) and (max-height:800px){.workbook-hero{height:50svh;min-height:280px}.workbook-savings{padding-top:18px}.workbook-savings .balance-label{margin-bottom:10px;font-size:17px}.workbook-savings .balance,.workbook-savings .balance small{font-size:40px}.workbook-savings .goal-row{margin-top:10px}.workbook-savings .actions{padding-top:10px}.workbook-savings .wish{margin-top:8px;font-size:15px}}
