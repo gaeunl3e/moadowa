@@ -42,7 +42,7 @@ function makeSnowCameraAssets(){
 }
 function createCameraSnow(){return Array.from({length:22},(_,i)=>({asset:Math.random()<.65?15:Math.floor(Math.random()*15),x:(i+Math.random())/22,phase:Math.random(),duration:11+Math.random()*5,size:Math.random(),drift:(Math.random()-.5)*.14,rotation:(Math.random()-.5)*.9}));}
 function drawCameraSnow(ctx,w,h,snow){
- for(const p of snow.particles){const progress=(snow.time/p.duration+p.phase)%1,image=snow.assets[p.asset],size=w*(p.asset===15?.025+p.size*.07:.10+p.size*.19),height=size*image.height/image.width;ctx.save();ctx.globalAlpha=Math.min(1,progress*12,(1-progress)*9)*.92;ctx.translate((p.x+Math.sin(progress*Math.PI*2)*p.drift)*w,progress*(h+height*2)-height);ctx.rotate(p.rotation*Math.sin(progress*Math.PI*1.5));ctx.drawImage(image,-size/2,-height/2,size,height);ctx.restore();}
+ for(const p of snow.particles){const progress=(snow.time/p.duration+p.phase)%1,image=snow.assets[p.asset],size=w*(p.asset===15?.025+p.size*.07:.10+p.size*.19)*.7,height=size*image.height/image.width;ctx.save();ctx.globalAlpha=Math.min(1,progress*12,(1-progress)*9)*.92;ctx.translate((p.x+Math.sin(progress*Math.PI*2)*p.drift)*w,progress*(h+height*2)-height);ctx.rotate(p.rotation*Math.sin(progress*Math.PI*1.5));ctx.drawImage(image,-size/2,-height/2,size,height);ctx.restore();}
 }
 function practiceCanvasBlob(canvas){return new Promise((resolve,reject)=>canvas.toBlob(b=>b?resolve(b):reject(new Error('사진을 만들지 못했어요. 다시 촬영해주세요.')),'image/jpeg',.9));}
 async function offerPracticePhotoSave(file,help){
