@@ -5,7 +5,7 @@ const exhibitionVideoDialog=document.createElement('dialog');
 exhibitionVideoDialog.className='exhibition-video';
 exhibitionVideoDialog.setAttribute('aria-labelledby','exhibition-video-title');
 document.body.append(exhibitionVideoDialog);
-function scheduleExhibitionVideo(){clearTimeout(exhibitionVideoTimer);exhibitionVideoTimer=setTimeout(()=>{if(!document.hidden&&document.body.classList.contains('home-page')&&!document.querySelector('dialog[open]'))showExhibitionVideo();else scheduleExhibitionVideo();},120000);}
+function scheduleExhibitionVideo(){clearTimeout(exhibitionVideoTimer);exhibitionVideoTimer=setTimeout(()=>{if(!document.hidden&&document.body.classList.contains('home-page')&&!document.querySelector('dialog[open]'))showExhibitionVideo();else scheduleExhibitionVideo();},50000);}
 function showExhibitionVideo(){
  if(document.hidden||!document.body.classList.contains('home-page')||document.querySelector('dialog[open]'))return;
  clearTimeout(exhibitionVideoTimer);
