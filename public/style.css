@@ -183,3 +183,20 @@ dialog.camera-mode{height:var(--camera-height,100dvh);max-height:var(--camera-he
  dialog.camera-mode.snow-camera-mode{width:min(94vw,1280px);max-width:1280px;margin:24px auto;border-radius:26px;overflow:hidden}
  .snow-camera-mode .camera-screen.camera-live{padding:14px 28px 18px}.snow-camera-mode .camera-live .camera-top{margin:2px 0 12px}.snow-camera-mode .camera-live .camera-top h2{font-size:23px;line-height:32px}.snow-camera-mode .camera-live .camera-view{align-items:center}.snow-camera-mode .camera-live .camera-canvas{width:100%;height:100%;object-fit:contain}.snow-camera-mode .camera-live .camera-status{font-size:15px;margin-top:12px}.snow-camera-mode .camera-controls{width:360px;max-width:100%;align-self:center}.snow-camera-mode .camera-privacy{font-size:12px}.snow-camera-mode .camera-options{right:28px}.snow-camera-mode .camera-review{padding:22px 40px 28px}.snow-camera-mode .camera-result{display:block;width:auto;max-width:100%;height:auto;max-height:65svh;margin:0 auto}.snow-camera-mode .camera-result-actions{max-width:560px;margin:20px auto 0}
 }
+
+/* Exhibition camera fills the browser viewport, including Safari full-screen mode. */
+@media(min-width:900px){
+ dialog.camera-mode.snow-camera-mode{position:fixed;inset:0;width:100vw;max-width:none;margin:0;padding:0;border:0;border-radius:0;height:var(--camera-height,100dvh);max-height:none}
+ .snow-camera-mode .camera-screen.camera-live{position:relative;padding:0;isolation:isolate;width:100%;height:100%;overflow:hidden}
+ .snow-camera-mode .camera-live .camera-view{position:absolute;inset:0;width:100%;height:100%;z-index:-2;display:flex;align-items:center;justify-content:center}
+ .snow-camera-mode .camera-live .camera-canvas{width:100%;height:100%;max-width:none;max-height:none;object-fit:contain}
+ .snow-camera-mode .camera-live::after{content:'';position:absolute;inset:0;pointer-events:none;z-index:-1;background:linear-gradient(to bottom,#0007,transparent 18%,transparent 70%,#0007)}
+ .snow-camera-mode .camera-live .camera-toolbar{position:absolute;top:24px;right:28px;left:90px;height:44px;margin:0}
+ .snow-camera-mode .camera-live .camera-top{position:absolute;top:30px;left:92px;right:250px;margin:0;pointer-events:none}.snow-camera-mode .camera-live .camera-top h2{font-size:22px;text-shadow:0 1px 8px #0006}
+ .snow-camera-mode .close{position:absolute;left:24px;top:24px;z-index:30;width:44px;height:44px;background:#0003;border-radius:50%}
+ .snow-camera-mode .camera-live .camera-status{position:absolute;bottom:135px;left:20%;right:20%;margin:0;font-size:16px;text-shadow:0 1px 8px #0009}
+ .snow-camera-mode .camera-live .camera-controls{position:absolute;bottom:43px;left:50%;transform:translateX(-50%);margin:0;width:360px;height:82px;min-height:82px;padding:0}
+ .snow-camera-mode .camera-live .camera-privacy{position:absolute;bottom:16px;left:20%;right:20%;margin:0;text-shadow:0 1px 8px #0009}
+ .snow-camera-mode .camera-live .camera-retry{position:absolute;bottom:165px;left:50%;transform:translateX(-50%);z-index:2}
+ .snow-camera-mode .camera-options{top:82px;right:28px}.snow-camera-mode .camera-review{min-height:100%;padding-top:30px;overflow:auto}
+}
