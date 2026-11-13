@@ -248,3 +248,22 @@ setInterval(()=>{if(document.hidden||!matchMedia('(min-width:900px)').matches||s
 document.addEventListener('visibilitychange',()=>{if(document.hidden)hideNfcReminder();});
 matchMedia('(min-width:900px)').addEventListener('change',hideNfcReminder);
 window.addEventListener('hashchange',hideNfcReminder);
+
+// Return an unattended exhibition animal page to the home cover on desktop only.
+const desktopReturnMedia=matchMedia('(min-width:900px)');
+let desktopReturnTimer;
+function scheduleDesktopHomeReturn(){
+ clearTimeout(desktopReturnTimer);
+ if(!desktopReturnMedia.matches||!/^#animal\/\d+$/.test(location.hash))return;
+ desktopReturnTimer=setTimeout(()=>{
+  if(!desktopReturnMedia.matches||!/^#animal\/\d+$/.test(location.hash))return;
+  if(document.hidden||document.querySelector('dialog[open]')){scheduleDesktopHomeReturn();return;}
+  location.hash='home';
+ },60000);
+}
+for(const event of ['pointerdown','keydown','input','wheel','scroll'])document.addEventListener(event,scheduleDesktopHomeReturn,{passive:true,capture:true});
+document.addEventListener('close',scheduleDesktopHomeReturn,true);
+document.addEventListener('visibilitychange',scheduleDesktopHomeReturn);
+window.addEventListener('hashchange',scheduleDesktopHomeReturn);
+desktopReturnMedia.addEventListener('change',scheduleDesktopHomeReturn);
+scheduleDesktopHomeReturn();
