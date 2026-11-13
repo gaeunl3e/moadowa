@@ -31,6 +31,7 @@ function warning(){return storageOK?'':'<div class="storage-warning" role="alert
 const animalDimensions={"1": [277.95, 192.55], "2": [277.95, 217.49], "3": [278.24, 285.69], "4": [278.24, 218.03], "5": [277.95, 210.64], "6": [278.24, 222.08], "7": [277.95, 206.82], "8": [278.24, 295.84], "9": [278.24, 277.74], "10": [278.24, 257.87], "11": [277.95, 210.43], "12": [277.95, 226.41], "13": [278.24, 224.38], "14": [277.95, 283.46], "15": [277.95, 226.06]};
 const animalFunds=[["WWF 미국 · 대왕고래 상징입양", "상징입양", "대왕고래를 선택해 해양·야생동물 보전 활동을 후원해요. 기부금이 이 종에만 지정되는 방식은 아니에요.", "https://gifts.worldwildlife.org/gift-center/gifts/species-adoptions/Blue-Whale"], ["Red Panda Network", "레서판다 보호 단체", "레서판다와 서식지 보호, 지역사회와 함께하는 보전 활동을 후원해요.", "https://redpandanetwork.org/donate"], ["Dian Fossey Gorilla Fund", "고릴라 보호 단체", "마운틴고릴라를 포함한 고릴라 보호와 서식지 보전 활동을 후원해요.", "https://www.save.gorillafund.org/campaign/699614/donate"], ["SEE Turtles · Too Rare To Wear", "매부리바다거북 관련 사업", "매부리바다거북 등껍질 거래를 줄이는 사업과 바다거북 보호를 지원해요.", "https://www.seeturtles.org/ways-to-give"], ["Porpoise Conservation Society", "바키타 보호 · 상징입양", "바키타 상징입양을 통해 바키타를 알리고 보호하는 활동에 힘을 보탤 수 있어요.", "https://porpoise.org/save-the-vaquita/"], ["WildCats Conservation Alliance", "호랑이·아무르표범 보호", "아무르 지역을 포함해 야생 호랑이와 아무르표범을 보호하는 현장 사업을 후원해요.", "https://conservewildcats.org/donate/"], ["WildCats Conservation Alliance", "아무르표범·호랑이 보호", "아무르표범과 야생 호랑이의 서식지·현장 보전 사업을 후원해요.", "https://conservewildcats.org/donate/"], ["Phoenix Zoo · Arabian Oryx", "동물원 상징입양", "목록에서 Arabian Oryx를 선택해 상징입양할 수 있어요. 동물원의 돌봄을 돕는 후원으로, 야생 개체에 대한 지정 기부는 아니에요.", "https://www.phoenixzoo.org/support/support-what-matters-most/animal-care/care-for-animals/"], ["Fauna & Flora · Asian Elephants", "아시아코끼리 보호 모금", "아시아코끼리와 사람 사이의 충돌을 줄이고 안전한 서식지를 만드는 활동을 후원해요.", "https://www.fauna-flora.org/appeals/save-asian-elephants/"], ["Painted Dog Conservation", "아프리카들개 보호 단체", "아프리카들개 보호 활동을 후원해요. 공식 페이지에서 WCN을 통한 기부 방법을 안내해요.", "https://www.painteddog.org/donate"], ["UNAM · AdoptAxolotl", "아홀로틀 전용 후원", "멕시코 국립자치대학교의 가상입양·서식지 후원으로 아홀로틀과 소치밀코의 서식지 회복을 도와요.", "https://www.ib.unam.mx/ib/adopta-axolotl/"], ["Saving the Javan Rhino · IRF", "자바코뿔소 전용 프로젝트", "GlobalGiving의 국제코뿔소재단 프로젝트를 통해 자바코뿔소 보호를 후원할 수 있어요.", "https://www.globalgiving.org/projects/saving-the-javan-rhino/donate/"], ["Giant Panda Conservation Support Fund", "자이언트판다 전용 기금", "도쿄동물원협회의 판다 보전 기금으로 판다 보전 교육과 사육 환경·보호 활동을 지원해요.", "https://www.tokyo-zoo.net/en/ueno/giant-panda-conservation-fund/index.html"], ["DOC · Kākāpō Recovery", "카카포 전용 보호 사업", "뉴질랜드 자연보전부의 카카포 회복 사업에 기부하거나 상징입양하는 방법을 알아볼 수 있어요.", "https://www.doc.govt.nz/our-work/kakapo-recovery/get-involved/"], ["Pygmy Hippo Foundation", "피그미하마 보호 단체", "피그미하마와 서아프리카 열대우림 서식지를 보호하는 재단의 후원 경로를 안내해요.", "https://pygmyhippofoundation.org/"]];
 function render(){
+ stopHomeSnow();
 cancelAnimalTouchHint();
 closePracticeCamera();
 document.querySelector('.home-snow')?.remove();
@@ -79,27 +80,27 @@ const desktop=`<section class="desktop-catalog" aria-label="모아도와 동물 
 app.innerHTML=warning()+`<section class="home-workbook" aria-label="모아도와 동물 도감"><h1 class="sr-only">모아도와, 함께하는 15종의 동물</h1><button class="home-logo-button" type="button" aria-label="모아도와, 동물 눈 내리기"><img src="assets/figma/home-b46f0.svg" alt="모아도와"></button>${cards}${slots}<span class="home-about-lettering" aria-hidden="true"><img src="assets/figma/home-d53cd.svg" alt=""></span><span class="home-dog-art" aria-hidden="true"><img src="assets/detail/10.svg" alt=""></span></section>${desktop}<div class="home-note">내 손으로 만들고, 마음을 모아 도와요.<br>동물 친구를 누르면 나의 저금통으로 연결돼요.</div>`;
 app.querySelector('.home-logo-button').onclick=playHomeSnow;
 app.querySelector('.catalog-logo').onclick=playHomeSnow;
-if(autoSnow)requestAnimationFrame(()=>{if(document.body.classList.contains('home-page'))playHomeSnow();});
+requestAnimationFrame(()=>{if(document.body.classList.contains('home-page'))playHomeSnow();});
 }
+let homeSnowTimer;
+function stopHomeSnow(){clearTimeout(homeSnowTimer);document.querySelector('.home-snow')?.remove();}
 function playHomeSnow(){
- if(document.querySelector('.home-snow'))return;
- const layer=document.createElement('div');layer.className='home-snow';layer.setAttribute('aria-hidden','true');
- const reduced=matchMedia('(prefers-reduced-motion: reduce)').matches;
- // Irregular positions and timing, with only local spacing to avoid clumps.
- const placed=[];
- for(let i=0;i<24;i++){
-  const plus=i%3!==0,item=document.createElement('span');item.className='snow-piece'+(plus?' snow-plus':'');
-  const size=plus?12+Math.pow(Math.random(),.8)*34:42+Math.random()*66;
-  let left,delay;
-  for(let attempt=0;attempt<60;attempt++){
-   left=7+Math.random()*86;delay=Math.random()*3.6;
-   if(placed.every(p=>Math.abs(p.left-left)>19||Math.abs(p.delay-delay)>.65))break;
+ if(document.querySelector('.home-snow')||!document.body.classList.contains('home-page')||matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+ const layer=document.createElement('div');layer.className='home-snow';layer.setAttribute('aria-hidden','true');document.body.append(layer);
+ let lastLeft=-100;
+ const spawn=()=>{
+  if(!layer.isConnected||!document.body.classList.contains('home-page')){stopHomeSnow();return;}
+  if(!document.hidden){
+   const plus=Math.random()<.65,item=document.createElement('span');item.className='snow-piece'+(plus?' snow-plus':'');
+   let left;for(let n=0;n<12;n++){left=4+Math.random()*92;if(Math.abs(left-lastLeft)>18)break;}lastLeft=left;
+   const size=plus?12+Math.random()*40:42+Math.random()*78;
+   item.style.cssText=`left:${left}%;width:${size}px;--drift:${(Math.random()-.5)*110}px;--turn:${(Math.random()-.5)*100}deg;animation-duration:${11+Math.random()*5}s`;
+   if(!plus){const image=new Image();image.src=`assets/camera/${String(1+Math.floor(Math.random()*15)).padStart(2,'0')}.svg?v=31`;image.alt='';item.append(image);}
+   item.addEventListener('animationend',()=>item.remove(),{once:true});layer.append(item);
   }
-  placed.push({left,delay});
-  item.style.cssText=`left:${left}%;width:${size}px;--drift:${(Math.random()-.5)*56}px;--turn:${(Math.random()-.5)*70}deg;animation-duration:${reduced?1:7+Math.random()*1.5}s;animation-delay:${reduced?Math.random()*.3:delay}s`;
-  if(!plus){const image=new Image();image.src=`assets/camera/${String(1+Math.floor(Math.random()*15)).padStart(2,'0')}.svg?v=31`;image.alt='';item.append(image);}layer.append(item);
- }
- document.body.append(layer);setTimeout(()=>layer.remove(),reduced?1500:12300);
+  homeSnowTimer=setTimeout(spawn,450+Math.random()*650);
+ };
+ spawn();
 }
 function renderAbout(){document.body.className='about-page';const steps=[['알아봐요.','워크북을 펼쳐 동물 친구의 이야기와 우리가 함께 지킬 자연을 알아봐요.'],['만들어요.','키트의 조각을 하나씩 맞추며 나만의 동물 저금통을 만들어요.'],['모아요.','워크북에 저금 목표를 적고, 작은 마음과 실천을 차곡차곡 모아요.'],['도와요.','모은 마음을 전할 곳을 골라요. 공식 기부 사이트에서 후원 방법을 알아봐요.']];app.innerHTML=`<article class="about-workbook"><a class="about-back back-link" href="#home" aria-label="홈으로 돌아가기"><img src="assets/figma/detail-5f09b.svg" alt=""></a><header class="about-cover"><a class="home-logo-button about-logo-button" href="#home" aria-label="모아도와 홈으로 가기"><img src="assets/figma/home-b46f0.svg" alt="모아도와"></a></header><h1><img src="assets/figma/about-title.svg" alt="모아서 도와요"></h1><p class="about-intro">작은 저금과 실천을 차곡차곡 모아,<br>환경을 지키는 습관으로 이어가요.</p><img class="about-process-art" src="assets/about-process.svg?v=14" alt="1 동물을 알아봐요, 2 저금통을 만들어요, 3 마음을 모아요, 4 동물을 도와요"><ol class="about-steps">${steps.map(([title,text],i)=>`<li><img class="about-step-no" src="assets/step-${i+1}.svg?v=14" alt="${i+1}"><div><h2>${title}</h2><p>${text}</p></div></li>`).join('')}</ol><p class="small-note">은행 앱과의 연계를 상상한 체험 사이트예요. 실제 계좌 연결과 이체는 제공하지 않아요. 목표와 기록은 사용 중인 브라우저에 저장돼요.</p><a class="primary" href="#home">함께할 동물 만나기 ↗</a></article>`;}
 

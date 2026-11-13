@@ -153,3 +153,13 @@ dialog.camera-mode{height:var(--camera-height,100dvh);max-height:var(--camera-he
 .nfc-reminder{display:none}
 @media(min-width:900px){.nfc-reminder{position:fixed;left:50%;bottom:32px;z-index:110;display:flex;align-items:center;gap:18px;width:max-content;max-width:calc(100vw - 64px);padding:22px 30px;border:1px solid #b0825533;border-radius:24px;background:#fffaf1f5;color:#845423;box-shadow:0 8px 36px #53300d24;opacity:0;transform:translate(-50%,12px);visibility:hidden;pointer-events:none;transition:opacity .5s ease,transform .5s ease,visibility .5s}.nfc-reminder.visible{opacity:1;transform:translate(-50%,0);visibility:visible}.nfc-reminder svg{width:32px;height:40px;flex:none}.nfc-reminder strong{display:block;font-size:19px;line-height:1.6;font-weight:800;word-break:keep-all}.nfc-reminder span{display:block;font-size:16px;line-height:1.6;margin-top:3px}}
 @media(prefers-reduced-motion:reduce){.nfc-reminder{transition:none}}
+
+/* Let the exhibition display use its available space rather than a fixed mobile-sized book. */
+@media(min-width:1200px){
+ .workbook{width:94%;max-width:1800px;padding:40px 28px 60px;gap:32px clamp(40px,4vw,88px);grid-template-columns:minmax(0,1.08fr) minmax(0,1fr)}
+ .workbook-hero{height:calc(100svh - 80px);min-height:640px;max-height:1120px;aspect-ratio:auto;top:40px;border-radius:40px}
+ .workbook-savings{padding:28px 30px 0}.workbook-savings .balance-label{font-size:clamp(18px,1.25vw,26px);line-height:1.6}.workbook-savings .balance,.workbook-savings .balance small{font-size:clamp(48px,3.8vw,76px)}
+ .workbook-savings .goal-row,.workbook-savings .goal-row .text-btn,.workbook-savings .goal-help{font-size:clamp(16px,1vw,21px);line-height:1.7}.workbook-savings .wish{font-size:17px}.workbook-savings .actions button{font-size:clamp(19px,1.2vw,24px);min-height:66px}.workbook-savings .demo-note{font-size:14px}
+ .paper-stack .paper summary{padding:26px 32px;min-height:98px}.paper-stack .fold-title{font-size:clamp(22px,1.5vw,30px)}.paper-stack .fold-no{font-size:16px}.paper-stack .paper .paper-body{padding:0 38px 32px;font-size:18px}.paper-stack .paper-body p,.paper-stack .paper .donor p{font-size:18px}.paper-stack .paper-body h3{font-size:21px}.workbook>.all-link{font-size:17px}
+ .photo-invite{left:calc(25% + 12px);top:84px;width:420px}
+}
