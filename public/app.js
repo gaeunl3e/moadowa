@@ -94,7 +94,8 @@ function playHomeSnow(){
   if(!document.hidden){
    const plus=Math.random()<.65,item=document.createElement('span');item.className='snow-piece'+(plus?' snow-plus':'');
    let left;for(let n=0;n<12;n++){left=4+Math.random()*92;if(Math.abs(left-lastLeft)>18)break;}lastLeft=left;
-   const size=plus?12+Math.random()*40:42+Math.random()*78;
+   const desktopScale=matchMedia('(min-width:900px)').matches?Math.min(2.8,Math.max(1.8,innerWidth/800)):1;
+   const size=(plus?12+Math.random()*40:42+Math.random()*78)*desktopScale;
    item.style.cssText=`left:${left}%;width:${size}px;--drift:${(Math.random()-.5)*110}px;--turn:${(Math.random()-.5)*100}deg;animation-duration:${11+Math.random()*5}s`;
    if(!plus){const image=new Image();image.src=`assets/camera/${String(1+Math.floor(Math.random()*15)).padStart(2,'0')}.svg?v=31`;image.alt='';item.append(image);}
    item.addEventListener('animationend',()=>item.remove(),{once:true});layer.append(item);
