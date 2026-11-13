@@ -73,11 +73,39 @@ function showPhotoInvite(){
 
 function renderHome(autoSnow=false){
 document.body.className='home-page';
+const homePhotoHint=`<span class="home-camera-hint"><svg class="home-camera-hint-art" role="img" aria-label="멸종위기동물들과 사진을 찍어보세요!" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 199.79 24.85">
+  <defs>
+    <style>
+      .photo-hint-1 {
+        font-family: 'NanumSquare', sans-serif;
+        font-size: 10px; font-weight: 800;
+      }
+
+      .photo-hint-1, .photo-hint-2 {
+        fill: #fff;
+      }
+
+      .photo-hint-3 {
+        fill: #5d3b2a;
+      }
+    </style>
+  </defs>
+  <g>
+    <g>
+      <rect class="photo-hint-3" width="199.79" height="24.85"/>
+      <text class="photo-hint-1" transform="translate(12.38 15.82)"><tspan x="0" y="0">멸종위기동물들과 사진을 찍어보세요!</tspan></text>
+      <g>
+        <path class="photo-hint-2" d="M183.65,15.49l.08-.35c.38-1.79.38-3.64,0-5.44l-.08-.35c-.28-1.3,1.31-2.16,2.25-1.22l3.21,3.21c.6.6.6,1.57,0,2.17l-3.21,3.21c-.94.94-2.52.08-2.25-1.22Z"/>
+        <path class="photo-hint-2" d="M174.27,12.41c0-.64.52-1.16,1.16-1.16h10.63c.64,0,1.16.52,1.16,1.16s-.52,1.16-1.16,1.16h-10.63c-.64,0-1.16-.52-1.16-1.16Z"/>
+      </g>
+    </g>
+  </g>
+</svg></span>`;
 const slots=homeSlots.filter(d=>d.node!=='64:3693'&&d.node!=='43:268').map(d=>`<span class="home-art-slot" data-figma-node="${d.node}" style="left:${d.x/3.9}%;top:${(d.y+(d.y>=200?-23.37:0))/16.54}%;width:${d.w/3.9}%;height:${d.h/16.54}%"><img src="assets/figma/${d.file}" alt="" style="width:${d.iw/3.9}cqw;transform:translate(-50%,-50%) rotate(${d.angle}deg)"></span>`).join('');
 const cards=Array.from({length:16},(_,i)=>{const row=Math.floor(i/2),col=i%2;const x=col?197.77:27.73,y=184+row*178.57,filled=(row+col)%2===1;return `<a class="home-tile ${filled?'filled':''}" href="${i<15?'#animal/'+(i+1):'#about'}" style="left:${x/3.9}%;top:${y/16.54}%;width:${164.34/3.9}%;height:${172.51/16.54}%" aria-label="${i<15?String(i+1).padStart(2,'0')+' '+animals[i].name+' 저금통 보기':'모아서 도와요, 이용 방법'}"></a>`;}).join('');
 const desktopCards=animals.map((animal,i)=>{const folder=[3,6,7,8,9,10,12,13,14,15].includes(animal.id)?'detail':'camera';return `<a class="catalog-card" href="#animal/${animal.id}"><h2><span>${String(animal.id).padStart(2,'0')}</span>${animal.name}</h2><span class="catalog-art" style="--animal-art:url('assets/${folder}/${String(animal.id).padStart(2,'0')}.svg')" aria-hidden="true"></span></a>`;}).join('');
-const desktop=`<section class="desktop-catalog" aria-label="모아도와 동물 도감"><header class="catalog-cover"><button class="catalog-logo" type="button" aria-label="모아도와, 동물 눈 내리기"><img src="assets/figma/home-b46f0.svg" alt="모아도와"></button><div class="catalog-cover-actions"><p>내 손으로 만들고,<br>마음을 모아 도와요.</p><button class="home-camera" type="button" aria-label="동물 눈과 함께 사진 찍기">${cameraIcon('camera')}<span class="home-camera-hint">멸종위기 동물들과 사진을 찍어보세요!<svg viewBox="0 0 20 14" fill="none" aria-hidden="true"><path d="M1 7h16M12 2l5 5-5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span><span>함께 사진 찍기</span></button></div></header><div class="catalog-grid">${desktopCards}<a class="catalog-card catalog-about" href="#about"><img src="assets/figma/home-d53cd.svg" alt="모아서 도와요"><span>모아도와 이야기 ↗</span></a></div></section>`;
-app.innerHTML=warning()+`<section class="home-workbook" aria-label="모아도와 동물 도감"><h1 class="sr-only">모아도와, 함께하는 15종의 동물</h1><button class="home-camera" type="button" aria-label="동물 눈과 함께 사진 찍기">${cameraIcon('camera')}<span class="home-camera-hint">멸종위기 동물들과 사진을 찍어보세요!<svg viewBox="0 0 20 14" fill="none" aria-hidden="true"><path d="M1 7h16M12 2l5 5-5 5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button><button class="home-logo-button" type="button" aria-label="모아도와, 동물 눈 내리기"><img src="assets/figma/home-b46f0.svg" alt="모아도와"></button>${cards}${slots}<span class="home-about-lettering" aria-hidden="true"><img src="assets/figma/home-d53cd.svg" alt=""></span><span class="home-dog-art" aria-hidden="true"><img src="assets/detail/10.svg" alt=""></span></section>${desktop}<div class="home-note">내 손으로 만들고, 마음을 모아 도와요.<br>동물 친구를 누르면 나의 저금통으로 연결돼요.</div>`;
+const desktop=`<section class="desktop-catalog" aria-label="모아도와 동물 도감"><header class="catalog-cover"><button class="catalog-logo" type="button" aria-label="모아도와, 동물 눈 내리기"><img src="assets/figma/home-b46f0.svg" alt="모아도와"></button><div class="catalog-cover-actions"><p>내 손으로 만들고,<br>마음을 모아 도와요.</p><button class="home-camera" type="button" aria-label="동물 눈과 함께 사진 찍기">${cameraIcon('camera')}${homePhotoHint}<span>함께 사진 찍기</span></button></div></header><div class="catalog-grid">${desktopCards}<a class="catalog-card catalog-about" href="#about"><img src="assets/figma/home-d53cd.svg" alt="모아서 도와요"><span>모아도와 이야기 ↗</span></a></div></section>`;
+app.innerHTML=warning()+`<section class="home-workbook" aria-label="모아도와 동물 도감"><h1 class="sr-only">모아도와, 함께하는 15종의 동물</h1><button class="home-camera" type="button" aria-label="동물 눈과 함께 사진 찍기">${cameraIcon('camera')}${homePhotoHint}</button><button class="home-logo-button" type="button" aria-label="모아도와, 동물 눈 내리기"><img src="assets/figma/home-b46f0.svg" alt="모아도와"></button>${cards}${slots}<span class="home-about-lettering" aria-hidden="true"><img src="assets/figma/home-d53cd.svg" alt=""></span><span class="home-dog-art" aria-hidden="true"><img src="assets/detail/10.svg" alt=""></span></section>${desktop}<div class="home-note">내 손으로 만들고, 마음을 모아 도와요.<br>동물 친구를 누르면 나의 저금통으로 연결돼요.</div>`;
 app.querySelector('.home-logo-button').onclick=playHomeSnow;
 app.querySelector('.catalog-logo').onclick=playHomeSnow;
 app.querySelectorAll('.home-camera').forEach(button=>button.onclick=()=>showPracticeCamera('snow'));
