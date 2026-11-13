@@ -200,3 +200,10 @@ dialog.camera-mode{height:var(--camera-height,100dvh);max-height:var(--camera-he
  .snow-camera-mode .camera-live .camera-retry{position:absolute;bottom:165px;left:50%;transform:translateX(-50%);z-index:2}
  .snow-camera-mode .camera-options{top:82px;right:28px}.snow-camera-mode .camera-review{min-height:100%;padding-top:30px;overflow:auto}
 }
+
+/* A short invitation beside the home camera, matching the supplied brown message. */
+.home-camera{position:relative}.home-camera-hint{position:absolute;right:calc(100% + 12px);top:50%;transform:translateY(-50%);display:flex;align-items:center;gap:12px;white-space:nowrap;width:max-content;max-width:calc(100vw - 100px);padding:10px 13px;background:#5d3b2a;color:#fffaf1;border-radius:3px;font-size:12px;line-height:18px;font-weight:700;opacity:0;visibility:hidden;pointer-events:none;animation:home-camera-invite 30s linear 3s infinite;box-shadow:0 3px 12px #5d3b2a18}.home-camera-hint svg{width:18px;height:14px;flex:none}.catalog-cover .home-camera-hint{font-size:14px;padding:12px 17px}
+@keyframes home-camera-invite{0%{opacity:0;visibility:visible}2%,17%{opacity:1;visibility:visible}19%,100%{opacity:0;visibility:hidden}}
+@media(max-width:359px){.home-camera-hint{font-size:10px;padding:8px 10px;gap:7px;right:calc(100% + 7px)}}
+@media(prefers-reduced-motion:reduce){@keyframes home-camera-invite{0%,17%{opacity:1;visibility:visible}18%,100%{opacity:0;visibility:hidden}}}
+.home-workbook>.home-camera{top:10px}
