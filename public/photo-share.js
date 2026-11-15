@@ -4,10 +4,14 @@ let activePhotoPickupCleanup=null;
 function closePhotoPickup(){activePhotoPickupCleanup?.();activePhotoPickupCleanup=null;}
 function photoKeyString(bytes){return btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
 function photoRemaining(milliseconds){const seconds=Math.max(0,Math.ceil(milliseconds/1000));return String(Math.floor(seconds/60)).padStart(2,'0')+':'+String(seconds%60).padStart(2,'0');}
-async function showPhotoPickup(file,host){
+async function showPhotoPickup(file){
  closePhotoPickup();const controller=new AbortController();let interval,disposed=false,ticket=null;
- activePhotoPickupCleanup=()=>{disposed=true;controller.abort();clearInterval(interval);};
- host.hidden=false;host.innerHTML='<p class="photo-pickup-status" role="status">사진을 암호화하고 QR을 준비하고 있어요…</p>';
+ const dialog=document.createElement('dialog');dialog.className='photo-pickup-dialog';dialog.setAttribute('aria-label','QR로 사진 받기');
+ dialog.innerHTML='<button class="photo-pickup-close" type="button" aria-label="QR 창 닫기">×</button><div class="photo-pickup"><p class="photo-pickup-status" role="status">사진을 암호화하고 QR을 준비하고 있어요…</p></div>';
+ const host=dialog.querySelector('.photo-pickup');
+ const dispose=()=>{if(disposed)return;disposed=true;controller.abort();clearInterval(interval);if(dialog.open)dialog.close();dialog.remove();if(activePhotoPickupCleanup===dispose)activePhotoPickupCleanup=null;};
+ activePhotoPickupCleanup=dispose;dialog.addEventListener('close',dispose,{once:true});dialog.querySelector('.photo-pickup-close').onclick=dispose;
+ document.body.append(dialog);dialog.showModal();
  const fail=message=>{if(disposed)return;host.innerHTML='';const status=document.createElement('p');status.className='photo-pickup-status';status.setAttribute('role','alert');status.textContent=message;host.append(status);};
  try{
   if(!crypto.subtle||typeof qrcode!=='function')throw new Error('unsupported');
@@ -24,6 +28,5 @@ async function showPhotoPickup(file,host){
   const clockOffset=result.serverTime-Date.now(),expires=Number(result.expiresAt),counter=host.querySelector('.photo-pickup-expiry');
   const tick=()=>{const remaining=expires-(Date.now()+clockOffset);if(remaining<=0){clearInterval(interval);host.innerHTML='<p class="photo-pickup-status">QR이 만료됐어요. 다시 QR로 받기를 눌러주세요.</p>';return;}counter.textContent=photoRemaining(remaining)+' 남았어요';};tick();interval=setInterval(tick,1000);
   host.querySelector('.photo-pickup-copy').onclick=async e=>{const button=e.currentTarget;try{await navigator.clipboard.writeText(pickup.href);if(!disposed)button.textContent='링크를 복사했어요';}catch{if(!disposed)button.textContent='QR을 휴대폰으로 스캔해주세요';}};
-  host.scrollIntoView({behavior:'smooth',block:'nearest'});
  }catch(error){if(error?.name==='AbortError')return;fail(error.message==='too_large'?'사진 용량이 커서 QR로 전달하지 못했어요. AirDrop이나 이메일로 받아주세요.':error.message==='rate_limited'?'잠시 후 다시 시도해주세요. AirDrop이나 이메일로도 받을 수 있어요.':'QR을 준비하지 못했어요. 잠시 후 다시 시도하거나 AirDrop·이메일로 받아주세요.');}
 }
