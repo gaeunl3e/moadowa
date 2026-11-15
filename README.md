@@ -31,3 +31,15 @@ main 브랜치에 코드를 올리면 자동 배포됩니다. 첫 배포의 Acti
 배포 완료 후 주소가 휴대폰에서 열리는 것을 확인하고 NFC 태그에 기록합니다.
 동물별 직접 연결 예시: `https://gaeunl3e.github.io/moadowa/#animal/1`
 저장소 이름과 주소를 유지하면 코드를 수정해도 NFC 주소를 다시 쓸 필요가 없습니다.
+
+
+## QR photo pickup
+
+The exhibition desktop home camera offers native AirDrop/email sharing and opt-in QR pickup.
+
+- Frontend: `public/photo-share.js`, `public/receive.html`, `public/receive.js`. QR encoder is vendored under `public/vendor` with its MIT license.
+- Supplementary service source: `../moadowa-photo-service`; deployed independently through Sites at `https://moadowa-photo-pickup.esteemedaudio.chatgpt.site`.
+- AES-GCM ciphertext is stored temporarily in R2. The key is carried only in the receiving URL fragment; never place it in server requests, analytics or logs.
+- Access stops exactly 10 minutes after upload. Expired objects are swept on server requests and via `.github/workflows/photo-cleanup.yml` (every five minutes; GitHub scheduling can be delayed).
+- No photo listing endpoint exists. Per-photo links are intentionally unguessable. Native sharing does not upload to the QR service.
+- Test QR flow with synthetic photos, not visitor photos. Never commit uploaded data or transient credentials.

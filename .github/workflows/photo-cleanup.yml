@@ -1,0 +1,18 @@
+name: Remove expired QR photos
+on:
+  schedule:
+    - cron: '*/5 * * * *'
+  workflow_dispatch:
+permissions: {}
+concurrency:
+  group: moadowa-photo-cleanup
+  cancel-in-progress: false
+jobs:
+  cleanup:
+    runs-on: ubuntu-latest
+    timeout-minutes: 2
+    steps:
+      - name: Remove only expired encrypted transfers
+        env:
+          PHOTO_CLEANUP_URL: https://moadowa-photo-pickup.esteemedaudio.chatgpt.site/api/cleanup
+        run: curl -A MoadowaPhotoCleanup/1.0 --fail --retry 2 --retry-all-errors --max-time 20 --silent --show-error "$PHOTO_CLEANUP_URL"
