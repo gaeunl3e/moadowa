@@ -9,7 +9,9 @@ function scheduleExhibitionVideo(){clearTimeout(exhibitionVideoTimer);exhibition
 function showExhibitionVideo(){
  if(document.hidden||!document.body.classList.contains('home-page')||document.querySelector('dialog[open]'))return;
  clearTimeout(exhibitionVideoTimer);
- exhibitionVideoDialog.innerHTML='<button class="film-close" type="button" aria-label="영상 닫기">×</button><h2 id="exhibition-video-title" class="sr-only">모아도와 이야기 영상</h2><video playsinline muted preload="none" poster="assets/video/moadowa-story.jpg" aria-label="모아도와 이야기 영상"></video><div class="film-question"><p>계속 시청하시겠습니까?</p><div class="film-choices"><button class="film-yes" type="button">네</button><button class="film-no" type="button">아니요</button></div><span class="film-countdown" aria-hidden="true">5초 후 자동으로 닫혀요</span></div>';
+ exhibitionVideoDialog.classList.remove('film-watching');
+ exhibitionVideoDialog.innerHTML='<button class="film-close" type="button" aria-label="영상 닫기">×</button><h2 id="exhibition-video-title" class="sr-only">모아도와 이야기 영상</h2><div class="film-stage"><video playsinline muted preload="none" poster="assets/video/moadowa-preview.jpg?v=66" aria-label="모아도와 이야기 영상"></video></div><div class="film-question"><div class="film-question-copy"><span class="film-label">모아도와 이야기</span><p>계속 시청하시겠습니까?</p><span class="film-countdown" aria-hidden="true">5초 후 자동으로 닫혀요</span></div><div class="film-choices"><button class="film-yes" type="button">네</button><button class="film-no" type="button">아니요</button></div></div>';
+
  const video=exhibitionVideoDialog.querySelector('video'),question=exhibitionVideoDialog.querySelector('.film-question'),countdown=exhibitionVideoDialog.querySelector('.film-countdown');
  let tick,loadingTimer,decisionStarted=false,accepted=false;
  const close=()=>{if(exhibitionVideoDialog.open)exhibitionVideoDialog.close();};
@@ -18,13 +20,12 @@ function showExhibitionVideo(){
  const startDecision=()=>{if(decisionStarted||accepted||!exhibitionVideoDialog.open)return;decisionStarted=true;const deadline=performance.now()+5000;tick=setInterval(()=>{const remaining=Math.ceil((deadline-performance.now())/1000);if(remaining<=0){close();return;}countdown.textContent=remaining+'초 후 자동으로 닫혀요';},100);};
  exhibitionVideoDialog.querySelector('.film-close').onclick=close;
  exhibitionVideoDialog.querySelector('.film-no').onclick=close;
- exhibitionVideoDialog.querySelector('.film-yes').onclick=()=>{accepted=true;clearInterval(tick);clearTimeout(loadingTimer);question.hidden=true;video.controls=true;video.muted=false;video.play().catch(()=>{video.controls=true;});};
+ exhibitionVideoDialog.querySelector('.film-yes').onclick=()=>{accepted=true;clearInterval(tick);question.hidden=true;exhibitionVideoDialog.classList.add('film-watching');video.controls=true;video.muted=false;video.parentElement.classList.add('film-preview-ready');video.src='assets/video/moadowa-story.mp4';loadingTimer=setTimeout(close,15000);video.load();video.play().catch(()=>{video.controls=true;});};
  exhibitionVideoDialog.addEventListener('close',cleanup,{once:true});
  exhibitionVideoDialog.addEventListener('cancel',close);
  document.addEventListener('visibilitychange',hidden);window.addEventListener('hashchange',close);
  video.addEventListener('playing',startDecision,{once:true});video.addEventListener('ended',close,{once:true});video.addEventListener('error',close,{once:true});
- exhibitionVideoDialog.showModal();video.muted=true;video.src='assets/video/moadowa-story.mp4';
- loadingTimer=setTimeout(close,15000);
- video.addEventListener('loadeddata',()=>{clearTimeout(loadingTimer);video.play().catch(startDecision);},{once:true});video.load();
+ video.addEventListener('loadeddata',()=>clearTimeout(loadingTimer),{once:true});
+ exhibitionVideoDialog.showModal();startDecision();
 }
 scheduleExhibitionVideo();
